@@ -1,4 +1,4 @@
-
+import eventbrite_client
 
 
 ACTIVITY_THRESHOLD = .5
@@ -9,9 +9,13 @@ def get_facebook_group_members():
     return [ {"name":"Victor J Wang"} ]
 
 def calculate_active_score(member):
+    score = 0
     # Has attended FB event.
     # Has attended eventbrite event.
-    return 0
+    eb_events = eventbrite_client.member_events.get(member)
+    if eb_events:
+        score += 1
+    return score
 
 
 if __name__ == "__main__":
